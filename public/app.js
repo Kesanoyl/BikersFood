@@ -144,6 +144,49 @@ const CAT_NAMES = {
 };
 const CAT_ORDER = ['formules','menus-duo-burgers','smash-burgers-seuls','burgers-seuls','naan-burgers-seuls','menu-naandwich','menus-sandwichs','tacos-seuls','menus-kids','tex-mex','desserts','boissons'];
 
+// ═══ OVERRIDES d'options par produit (survivent à une régénération du MENU) ═══
+const SAUCES_BF = SAUCES; // liste de sauces générique — à confirmer avec le client
+const GOURMAND_BURGERS = ['Giant Burger','Big Burger','Cheese Burger','Double Cheese Bacon','Double Cheese Burger','Fish Burger'];
+const GOURMAND_NAANS = ['Triple Steaks','Super Trio','Tornado','Chicken Tandoori','Cordon'];
+const TACOS_VIANDES = [{name:'Merguez',price:0},{name:'Tenders',price:1.00},{name:'Cordon bleu',price:0},{name:'Viande hachée',price:0},{name:'Nuggets',price:0},{name:'Chicken Tandoori',price:0},{name:'Escalope grillée',price:0},{name:'Fish',price:0}];
+const TACOS_SUPPS = [{name:'Sauce Fromagère',price:1.50},{name:'Cheddar',price:1.00},{name:'Tomates',price:1.00},{name:'Oignons rouges',price:1.00},{name:'Cornichons',price:1.00},{name:'Olive vert',price:1.00},{name:'Maïs',price:1.00},{name:'Galette de Pomme de terre',price:1.50}];
+const NAAN_SUPPS = [{name:'Oeuf',price:1.00},{name:'Cheddar',price:1.00},{name:'Boursin',price:1.00},{name:'Bacon',price:1.00}];
+const PAINS_SANDWICH = ['Pain Maison','Tortilla'];
+(function applyMenuOverrides(){
+  const byId=Object.fromEntries(MENU.map(m=>[m.id,m]));
+  const sauce2={list:SAUCES_BF,count:2};
+  // 1) Formules sur-mesure
+  if(byId['formules-menu-sandwich-gourmand'])byId['formules-menu-sandwich-gourmand'].custom={burgerChoice:GOURMAND_BURGERS,naanChoice:GOURMAND_NAANS,pain:PAINS,condiments:COND,sauces:sauce2,boissonMenu:DRINKS};
+  if(byId['formules-menu-tacos-gourmand'])byId['formules-menu-tacos-gourmand'].custom={burgerChoice:GOURMAND_BURGERS,viandeChoice:TACOS_VIANDES,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:TACOS_SUPPS},boissonMenu:DRINKS};
+  if(byId['formules-menu-duo-burgers'])byId['formules-menu-duo-burgers'].custom={burgerChoice:GOURMAND_BURGERS,burger2Choice:GOURMAND_BURGERS,sauces:sauce2,boissonMenu:DRINKS};
+  // 2) Duo Burgers B1..B8 : sauces + boisson uniquement
+  MENU.filter(m=>m.cat==='menus-duo-burgers').forEach(m=>{ m.custom={sauces:sauce2,boissonMenu:DRINKS}; });
+  // 3) Burgers / Smash / Naan Burgers : ajoute le choix de sauces (la boisson reste via l'option "En menu")
+  MENU.filter(m=>['burgers-seuls','smash-burgers-seuls','naan-burgers-seuls'].includes(m.cat)).forEach(m=>{ m.custom=Object.assign({},m.custom,{sauces:sauce2}); });
+  // 4) Naan'Dwich : pain + condiments (déjà) + sauces + suppléments payants (boisson via "En menu")
+  MENU.filter(m=>m.cat==='menu-naandwich').forEach(m=>{ m.custom=Object.assign({},m.custom,{sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:NAAN_SUPPS}}); });
+  // 5) Sandwichs : pain (Pain Maison/Tortilla) + condiments + sauces + suppléments payants (boisson via "En menu")
+  MENU.filter(m=>m.cat==='menus-sandwichs').forEach(m=>{ m.custom=Object.assign({},m.custom,{pain:PAINS_SANDWICH,sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:NAAN_SUPPS}}); });
+  // 6) Tacos seuls : viande au choix + sauces + suppléments (dont Frites +2€) — boisson déjà incluse
+  const TACOS_SUPPS2 = TACOS_SUPPS.concat([{name:'Frites',price:2.00}]);
+  MENU.filter(m=>m.cat==='tacos-seuls').forEach(m=>{ m.custom=Object.assign({},m.custom,{viandeChoice:TACOS_VIANDES,sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:TACOS_SUPPS2}}); });
+  // 7) Menu Enfant : choix Cheeseburger ou Nuggets
+  if(byId['menus-kids-menu-enfant'])byId['menus-kids-menu-enfant'].custom={plat:['Cheeseburger','Nuggets']};
+  // 8) Tex Mex : portions (nombre de pièces) avec surcoût
+  const TEX_PORTIONS={
+    'tex-mex-mozza-sticks':[{name:'4 pièces',price:0},{name:'8 pièces',price:2.00}],
+    'tex-mex-tenders':[{name:'3 pièces',price:0},{name:'5 pièces',price:3.00}],
+    'tex-mex-nuggets':[{name:'4 pièces',price:0},{name:'8 pièces',price:2.00}],
+    'tex-mex-bouchées-de-camembert':[{name:'4 pièces',price:0},{name:'8 pièces',price:2.00}],
+  };
+  Object.keys(TEX_PORTIONS).forEach(id=>{ if(byId[id])byId[id].custom=Object.assign({},byId[id].custom,{portion:TEX_PORTIONS[id]}); });
+  // 9) Desserts : nouveaux produits (Tiramisu Bueno + Milkshake)
+  const MILK_SAVEURS=['Kinder Bueno',"M&M's",'Oréo','Nutella','Banane','Mangue','Fraise','Fruit exotique','Speculoos','Daim','Vanille'];
+  MENU.push({id:'desserts-tiramisu-bueno',cat:'desserts',name:'Tiramisu Bueno',desc:'Saveur Kinder Bueno.',price:3.00,emoji:'🍰',img:''});
+  MENU.push({id:'desserts-milkshake',cat:'desserts',name:'Milkshake',desc:'Milkshake maison — nappage & saveur au choix.',price:4.50,emoji:'🥤',img:'',
+    custom:{nappage:['Chocolat','Caramel','Sans nappage'],saveurChoice:MILK_SAVEURS,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:MILK_SAVEURS.map(s=>({name:s,price:1.00}))}}});
+})();
+
 // ═══ STATE ═══════════════════════════════════════════════════
 let cart = JSON.parse(localStorage.getItem('bikersfood_cart') || '[]');
 let activeCat = 'all';
@@ -517,6 +560,13 @@ function openModal(itemId, existingCartItem) {
     if(c.sauces){editState.sauceCount=c.sauces.count||2;editState.sauces=[c.sauces.list[0]];if(c.sauces.count>1)editState.sauces.push(c.sauces.list[1]||c.sauces.list[0]);}
     if(c.accompagnement)editState.accompagnement=Array.isArray(c.accompagnement)?c.accompagnement[0]:c.accompagnement;
     if(c.boissonMenu)editState.boissonMenu=c.boissonMenu[0];
+    if(c.burgerChoice)editState.burgerChoice=c.burgerChoice[0];
+    if(c.burger2Choice)editState.burger2Choice=c.burger2Choice[0];
+    if(c.naanChoice)editState.naanChoice=c.naanChoice[0];
+    if(c.viandeChoice)editState.viandeChoice=c.viandeChoice[0].name;
+    if(c.portion)editState.portion=c.portion[0].name;
+    if(c.nappage)editState.nappage=c.nappage[0];
+    if(c.saveurChoice)editState.saveurChoice=c.saveurChoice[0];
     if(c.pain)editState.pain=c.pain[0];
     if(c.condiments)editState.condiments=[...c.condiments.list];
     if(c.plat)editState.plat=c.plat[0];
@@ -582,11 +632,31 @@ function openModal(itemId, existingCartItem) {
       if(p.dataset.val==='Sans condiment')p.classList.toggle('active',(editState.condiments||[]).length===0);
       else p.classList.toggle('active',(editState.condiments||[]).includes(p.dataset.val));
     });
+    // Burger / Naan / Viande / Portion / Nappage / Saveur au choix (single-select)
+    ['burgerChoice','burger2Choice','naanChoice','viandeChoice','portion','nappage','saveurChoice'].forEach(k=>{
+      $('custom-body').querySelectorAll('.sauce-pill[data-key="'+k+'"]').forEach(p=>{
+        p.classList.toggle('active',editState[k]===p.dataset.val);
+      });
+    });
   },50);
 }
 
 function buildModalHTML(c) {
   let h='';
+  // Burger au choix (formules)
+  if(c.burgerChoice){h+='<div class="custom-group"><label class="custom-label">🍔 Burger au choix</label><div class="sauce-grid">'+c.burgerChoice.map(v=>'<button class="sauce-pill" data-key="burgerChoice" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
+  // 2ème burger au choix (Duo)
+  if(c.burger2Choice){h+='<div class="custom-group"><label class="custom-label">🍔 2ème burger au choix</label><div class="sauce-grid">'+c.burger2Choice.map(v=>'<button class="sauce-pill" data-key="burger2Choice" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
+  // Naan au choix (formules)
+  if(c.naanChoice){h+='<div class="custom-group"><label class="custom-label">🌯 Naan au choix</label><div class="sauce-grid">'+c.naanChoice.map(v=>'<button class="sauce-pill" data-key="naanChoice" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
+  // Viande au choix (prix par item)
+  if(c.viandeChoice){h+='<div class="custom-group"><label class="custom-label">🍖 Viande au choix</label><div class="sauce-grid">'+c.viandeChoice.map(v=>'<button class="sauce-pill" data-key="viandeChoice" data-val="'+v.name+'">'+v.name+(v.price>0?'<span class="pill-price">+'+v.price.toFixed(2).replace('.',',')+'€</span>':'')+'</button>').join('')+'</div></div>';}
+  // Portion (tex mex, prix par taille)
+  if(c.portion){h+='<div class="custom-group"><label class="custom-label">🍽️ Portion</label><div class="sauce-grid">'+c.portion.map(v=>'<button class="sauce-pill" data-key="portion" data-val="'+v.name+'">'+v.name+(v.price>0?'<span class="pill-price">+'+v.price.toFixed(2).replace('.',',')+'€</span>':'')+'</button>').join('')+'</div></div>';}
+  // Nappage (milkshake)
+  if(c.nappage){h+='<div class="custom-group"><label class="custom-label">🍫 Nappage</label><div class="sauce-grid">'+c.nappage.map(v=>'<button class="sauce-pill" data-key="nappage" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
+  // Saveur (milkshake)
+  if(c.saveurChoice){h+='<div class="custom-group"><label class="custom-label">🥤 Saveur</label><div class="sauce-grid">'+c.saveurChoice.map(v=>'<button class="sauce-pill" data-key="saveurChoice" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
   // Gratinage
   if(c.gratinage){h+='<div class="custom-group"><label class="custom-label">🧀 Gratinage</label><div class="sauce-grid">'+c.gratinage.list.map(g=>'<button class="sauce-pill" data-key="gratinage" data-val="'+g+'">'+g+'</button>').join('')+'</div></div>';}
   // Viandes
@@ -623,7 +693,7 @@ function buildModalHTML(c) {
   // Boisson menu standalone (only for items without menu toggle, like tacos menus)
   if(c.boissonMenu&&!c.menu){h+='<div class="custom-group"><label class="custom-label">🥤 Boisson</label><div class="sauce-grid">'+c.boissonMenu.map(d=>'<button class="sauce-pill" data-key="boissonMenu" data-val="'+d+'">'+d+'</button>').join('')+'</div></div>';}
   // No options
-  const hasOpts=c.viandes||c.sauces||c.gratinage||c.accompagnement||c.crudites||c.plat||c.boissonMenu||c.menu||c.extrasConfig||c.pain||c.condiments;
+  const hasOpts=c.viandes||c.sauces||c.gratinage||c.accompagnement||c.crudites||c.plat||c.boissonMenu||c.menu||c.extrasConfig||c.pain||c.condiments||c.burgerChoice||c.burger2Choice||c.naanChoice||c.viandeChoice||c.portion||c.nappage||c.saveurChoice;
   if(!hasOpts){h+='<div class="custom-group" style="text-align:center;border-bottom:0"><p style="color:var(--text-dim);font-size:0.9rem;">'+(editing.desc||'')+'</p></div>';}
   $('custom-body').innerHTML=h;
 
@@ -717,6 +787,8 @@ function updatePrice(){
   const c=editing.custom||{};let p=editing.price;
   if(c.viandes?.prices){const i=(editState.nbViandes||1)-1;if(c.viandes.prices[i])p=c.viandes.prices[i];}
   if(c.menu&&editState.menu)p+=c.menu;
+  if(c.viandeChoice&&editState.viandeChoice){const v=c.viandeChoice.find(x=>x.name===editState.viandeChoice);if(v&&v.price)p+=v.price;}
+  if(c.portion&&editState.portion){const v=c.portion.find(x=>x.name===editState.portion);if(v&&v.price)p+=v.price;}
   const xc=c.extrasConfig;
   const extrasTotal=xc?(editState.extras||[]).reduce((sum,name)=>sum+getExtraPrice(xc,name),0):0;
   p+=extrasTotal;
@@ -730,6 +802,8 @@ function confirmProduct(){
   const c=editing.custom||{};let p=editing.price;
   if(c.viandes?.prices){const i=(editState.nbViandes||1)-1;if(c.viandes.prices[i])p=c.viandes.prices[i];}
   if(c.menu&&editState.menu)p+=c.menu;
+  if(c.viandeChoice&&editState.viandeChoice){const v=c.viandeChoice.find(x=>x.name===editState.viandeChoice);if(v&&v.price)p+=v.price;}
+  if(c.portion&&editState.portion){const v=c.portion.find(x=>x.name===editState.portion);if(v&&v.price)p+=v.price;}
   const xc=c.extrasConfig;
   const extrasTotal=xc?(editState.extras||[]).reduce((sum,name)=>sum+getExtraPrice(xc,name),0):0;
   p+=extrasTotal;
@@ -739,6 +813,13 @@ function confirmProduct(){
   if(editState.viandes?.length)l+=(l?' • ':'')+editState.viandes.join('+');
   if(c.accompagnement&&editState.accompagnement)l+=(l?' • ':'')+editState.accompagnement;
   if(c.crudites&&editState.crudites)l+=(l?' • ':'')+'Crudités: '+editState.crudites;
+  if(c.burgerChoice&&editState.burgerChoice)l+=(l?' • ':'')+'Burger: '+editState.burgerChoice;
+  if(c.burger2Choice&&editState.burger2Choice)l+=(l?' • ':'')+'Burger 2: '+editState.burger2Choice;
+  if(c.naanChoice&&editState.naanChoice)l+=(l?' • ':'')+'Naan: '+editState.naanChoice;
+  if(c.viandeChoice&&editState.viandeChoice)l+=(l?' • ':'')+'Viande: '+editState.viandeChoice;
+  if(c.portion&&editState.portion)l+=(l?' • ':'')+editState.portion;
+  if(c.nappage&&editState.nappage)l+=(l?' • ':'')+'Nappage: '+editState.nappage;
+  if(c.saveurChoice&&editState.saveurChoice)l+=(l?' • ':'')+'Saveur: '+editState.saveurChoice;
   if(c.pain&&editState.pain)l+=(l?' • ':'')+'Pain: '+editState.pain;
   if(c.condiments)l+=(l?' • ':'')+'Condiments: '+((editState.condiments&&editState.condiments.length)?editState.condiments.join('+'):'Sans');
   if(editState.sauces?.length)l+=(l?' • ':'')+'Sauces: '+editState.sauces.join('+');
@@ -762,6 +843,13 @@ function confirmProduct(){
   if((editState.viandes&&editState.viandes.length)||exViandes.length)comp.push({i:'🍖',k:'Viandes',base:editState.viandes||[],extra:exViandes});
   if(c.accompagnement&&editState.accompagnement)comp.push({i:'🍟',k:'Accomp.',base:[editState.accompagnement],extra:[]});
   if(c.crudites&&editState.crudites)comp.push({i:'🥬',k:'Crudités',base:[editState.crudites],extra:[]});
+  if(c.burgerChoice&&editState.burgerChoice)comp.push({i:'🍔',k:'Burger',base:[editState.burgerChoice],extra:[]});
+  if(c.burger2Choice&&editState.burger2Choice)comp.push({i:'🍔',k:'2ème burger',base:[editState.burger2Choice],extra:[]});
+  if(c.naanChoice&&editState.naanChoice)comp.push({i:'🌯',k:'Naan',base:[editState.naanChoice],extra:[]});
+  if(c.viandeChoice&&editState.viandeChoice)comp.push({i:'🍖',k:'Viande',base:[editState.viandeChoice],extra:[]});
+  if(c.portion&&editState.portion)comp.push({i:'🍽️',k:'Portion',base:[editState.portion],extra:[]});
+  if(c.nappage&&editState.nappage)comp.push({i:'🍫',k:'Nappage',base:[editState.nappage],extra:[]});
+  if(c.saveurChoice&&editState.saveurChoice)comp.push({i:'🥤',k:'Saveur',base:[editState.saveurChoice],extra:[]});
   if(c.pain&&editState.pain)comp.push({i:'🫓',k:'Pain',base:[editState.pain],extra:[]});
   if(c.condiments)comp.push({i:'🥗',k:'Condiments',base:((editState.condiments&&editState.condiments.length)?editState.condiments:['Sans condiment']),extra:[]});
   if((editState.sauces&&editState.sauces.length)||exSauces.length)comp.push({i:'🥫',k:'Sauces',base:editState.sauces||[],extra:exSauces});
