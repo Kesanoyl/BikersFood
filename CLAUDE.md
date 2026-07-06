@@ -1,7 +1,7 @@
 # Bikers Food — Site Click & Collect
 
 ## Résumé
-Site de commande en ligne pour **Bikers Food** (Noisy-le-Sec, 93130). Restaurant casual food — Burgers, smash burgers, naan burgers, tacos, sandwichs, tex-mex. 100% halal. Commande + paiement en ligne + compte client.
+Site de commande en ligne pour **Bikers Food** (Gournay-sur-Marne, 93460). Restaurant casual food — Burgers, smash burgers, naan burgers, tacos, sandwichs, tex-mex. 100% halal. Commande + paiement en ligne + compte client.
 
 Dupliqué depuis le site **La Marinade** (même moteur), avec carte, logo, coordonnées et palette adaptés à Bikers Food. Le "Composer" de tacos de La Marinade a été retiré (carte à base de menus fixes).
 
@@ -20,9 +20,9 @@ Dupliqué depuis le site **La Marinade** (même moteur), avec carte, logo, coord
 - Polices : Playfair Display (headings) + Inter (body) + Bebas Neue (logo)
 
 ## Coordonnées (site vitrine)
-- Adresse : 7 Bd de la Boissière, 93130 Noisy-le-Sec
-- Téléphone : 01 41 63 61 45
-- Horaires : Lun–Jeu 11h30–00h00 · Ven 11h30–13h00 & 14h30–00h00 · Sam–Dim 11h30–00h00
+- Adresse : 3 Avenue du Maréchal Joffre, 93460 Gournay-sur-Marne
+- Téléphone : 01 87 65 17 52
+- Horaires : Mar–Jeu 11h00–23h00 · Ven 11h00–13h30 & 15h00–23h30 · Sam 11h00–23h30 · Dim 11h00–23h00 · Lun fermé
 
 ## Lancer en local
 ```bash
