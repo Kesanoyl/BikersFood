@@ -125,7 +125,7 @@ const MENU = [
   { id:'boissons-oasis-tropical-33-cl', cat:'boissons', name:'Oasis Tropical 33 cl', desc:'33 cl.', price:1.50, emoji:'🧊', img:'boissons-oasis-tropical-33-cl.jpg' },
   { id:'boissons-oasis-pomme-cassis-framboise-33-cl', cat:'boissons', name:'Oasis Pomme Cassis Framboise 33 cl', desc:'33 cl.', price:1.50, emoji:'🧊', img:'boissons-oasis-pomme-cassis-framboise-33-cl.jpg' },
   { id:'boissons-perrier-33-cl', cat:'boissons', name:'Perrier 33 cl', desc:'33 cl', price:1.50, emoji:'🧊', img:'boissons-perrier-33-cl.jpg' },
-  { id:'boissons-cristaline-50-cl', cat:'boissons', name:'Cristaline 50 cl', desc:'50 cl', price:1.00, emoji:'💧' },
+  { id:'boissons-cristaline-50-cl', cat:'boissons', name:'Cristaline 50 cl', desc:'50 cl', price:1.00, emoji:'💧', img:'boissons-cristaline-50-cl.jpg' },
 ];
 
 const CAT_NAMES = {
