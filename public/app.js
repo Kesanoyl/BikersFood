@@ -958,7 +958,13 @@ function unlockScroll(){
   if(!document.body.classList.contains('scroll-locked'))return;
   document.body.classList.remove('scroll-locked');
   document.body.style.top='';
+  // Restauration INSTANTANÉE de la position (le CSS scroll-behavior:smooth
+  // ferait sinon défiler la page visiblement à la fermeture du modal).
+  const html=document.documentElement;
+  const prev=html.style.scrollBehavior;
+  html.style.scrollBehavior='auto';
   window.scrollTo(0,_scrollLockY);
+  html.style.scrollBehavior=prev;
 }
 function openCart(){$('cart-panel').classList.add('open');$('cart-overlay').classList.add('open');lockScroll();}
 function closeCart(){$('cart-panel').classList.remove('open');$('cart-overlay').classList.remove('open');unlockScroll();}
