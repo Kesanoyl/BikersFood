@@ -145,7 +145,7 @@ const CAT_NAMES = {
 const CAT_ORDER = ['formules','menus-duo-burgers','smash-burgers-seuls','burgers-seuls','naan-burgers-seuls','menu-naandwich','menus-sandwichs','tacos-seuls','menus-kids','tex-mex','desserts','boissons'];
 
 // ═══ OVERRIDES d'options par produit (survivent à une régénération du MENU) ═══
-const SAUCES_BF = SAUCES; // liste de sauces générique — à confirmer avec le client
+const SAUCES_BF = ['Algérienne','Barbecue','Ketchup','Mayonnaise','Samouraï','Biggy','Harissa','Fish','Andalouse','Cheezy','Poivre','Blanche','Sans Sauce'];
 const GOURMAND_BURGERS = ['Giant Burger','Big Burger','Cheese Burger','Double Cheese Bacon','Double Cheese Burger','Fish Burger'];
 const GOURMAND_NAANS = ['Triple Steaks','Super Trio','Tornado','Chicken Tandoori','Cordon'];
 const TACOS_VIANDES = [{name:'Merguez',price:0},{name:'Tenders',price:1.00},{name:'Cordon bleu',price:0},{name:'Viande hachée',price:0},{name:'Nuggets',price:0},{name:'Chicken Tandoori',price:0},{name:'Escalope grillée',price:0},{name:'Fish',price:0}];
@@ -157,7 +157,7 @@ const PAINS_SANDWICH = ['Pain Maison','Tortilla'];
   const sauce2={list:SAUCES_BF,count:2};
   // 1) Formules sur-mesure
   if(byId['formules-menu-sandwich-gourmand'])byId['formules-menu-sandwich-gourmand'].custom={burgerChoice:GOURMAND_BURGERS,naanChoice:GOURMAND_NAANS,pain:PAINS,condiments:COND,sauces:sauce2,boissonMenu:DRINKS};
-  if(byId['formules-menu-tacos-gourmand'])byId['formules-menu-tacos-gourmand'].custom={burgerChoice:GOURMAND_BURGERS,viandeChoice:TACOS_VIANDES,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:TACOS_SUPPS},boissonMenu:DRINKS};
+  if(byId['formules-menu-tacos-gourmand'])byId['formules-menu-tacos-gourmand'].custom={burgerChoice:GOURMAND_BURGERS,viandeChoice:TACOS_VIANDES,viandeMax:2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:TACOS_SUPPS},boissonMenu:DRINKS};
   if(byId['formules-menu-duo-burgers'])byId['formules-menu-duo-burgers'].custom={burgerChoice:GOURMAND_BURGERS,burger2Choice:GOURMAND_BURGERS,sauces:sauce2,boissonMenu:DRINKS};
   // 2) Duo Burgers B1..B8 : sauces + boisson uniquement
   MENU.filter(m=>m.cat==='menus-duo-burgers').forEach(m=>{ m.custom={sauces:sauce2,boissonMenu:DRINKS}; });
@@ -169,7 +169,7 @@ const PAINS_SANDWICH = ['Pain Maison','Tortilla'];
   MENU.filter(m=>m.cat==='menus-sandwichs').forEach(m=>{ m.custom=Object.assign({},m.custom,{pain:PAINS_SANDWICH,sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:NAAN_SUPPS}}); });
   // 6) Tacos seuls : viande au choix + sauces + suppléments (dont Frites +2€) — boisson déjà incluse
   const TACOS_SUPPS2 = TACOS_SUPPS.concat([{name:'Frites',price:2.00}]);
-  MENU.filter(m=>m.cat==='tacos-seuls').forEach(m=>{ m.custom=Object.assign({},m.custom,{viandeChoice:TACOS_VIANDES,sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:TACOS_SUPPS2}}); });
+  MENU.filter(m=>m.cat==='tacos-seuls').forEach(m=>{ const vm=/-xl$/.test(m.id)?3:(/-l$/.test(m.id)?2:1); m.custom=Object.assign({},m.custom,{viandeChoice:TACOS_VIANDES,viandeMax:vm,sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:TACOS_SUPPS2}}); });
   // 7) Menu Enfant : choix Cheeseburger ou Nuggets
   if(byId['menus-kids-menu-enfant'])byId['menus-kids-menu-enfant'].custom={plat:['Cheeseburger','Nuggets']};
   // 8) Tex Mex : portions (nombre de pièces) avec surcoût
@@ -183,7 +183,7 @@ const PAINS_SANDWICH = ['Pain Maison','Tortilla'];
   // 9) Desserts : nouveaux produits (Tiramisu Bueno + Milkshake)
   const MILK_SAVEURS=['Kinder Bueno',"M&M's",'Oréo','Nutella','Banane','Mangue','Fraise','Fruit exotique','Speculoos','Daim','Vanille'];
   MENU.push({id:'desserts-tiramisu-bueno',cat:'desserts',name:'Tiramisu Bueno',desc:'Saveur Kinder Bueno.',price:3.00,emoji:'🍰',img:''});
-  MENU.push({id:'desserts-milkshake',cat:'desserts',name:'Milkshake',desc:'Milkshake maison — nappage & saveur au choix.',price:4.50,emoji:'🥤',img:'',
+  MENU.push({id:'desserts-milkshake',cat:'desserts',name:'Milkshake',desc:'Milkshake maison — nappage & saveur au choix.',price:5.90,emoji:'🥤',img:'',
     custom:{nappage:['Chocolat','Caramel','Sans nappage'],saveurChoice:MILK_SAVEURS,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:MILK_SAVEURS.map(s=>({name:s,price:1.00}))}}});
 })();
 
@@ -563,7 +563,7 @@ function openModal(itemId, existingCartItem) {
     if(c.burgerChoice)editState.burgerChoice=c.burgerChoice[0];
     if(c.burger2Choice)editState.burger2Choice=c.burger2Choice[0];
     if(c.naanChoice)editState.naanChoice=c.naanChoice[0];
-    if(c.viandeChoice)editState.viandeChoice=c.viandeChoice[0].name;
+    if(c.viandeChoice){const mx=c.viandeMax||1;const free=c.viandeChoice.filter(v=>!v.price);const src=free.length>=mx?free:c.viandeChoice;editState.viandeChoice=src.slice(0,mx).map(v=>v.name);}
     if(c.portion)editState.portion=c.portion[0].name;
     if(c.nappage)editState.nappage=c.nappage[0];
     if(c.saveurChoice)editState.saveurChoice=c.saveurChoice[0];
@@ -632,11 +632,15 @@ function openModal(itemId, existingCartItem) {
       if(p.dataset.val==='Sans condiment')p.classList.toggle('active',(editState.condiments||[]).length===0);
       else p.classList.toggle('active',(editState.condiments||[]).includes(p.dataset.val));
     });
-    // Burger / Naan / Viande / Portion / Nappage / Saveur au choix (single-select)
-    ['burgerChoice','burger2Choice','naanChoice','viandeChoice','portion','nappage','saveurChoice'].forEach(k=>{
+    // Burger / Naan / Portion / Nappage / Saveur au choix (single-select)
+    ['burgerChoice','burger2Choice','naanChoice','portion','nappage','saveurChoice'].forEach(k=>{
       $('custom-body').querySelectorAll('.sauce-pill[data-key="'+k+'"]').forEach(p=>{
         p.classList.toggle('active',editState[k]===p.dataset.val);
       });
+    });
+    // Viande au choix (multi)
+    $('custom-body').querySelectorAll('.sauce-pill[data-key="viandeChoice"]').forEach(p=>{
+      p.classList.toggle('active',(editState.viandeChoice||[]).includes(p.dataset.val));
     });
   },50);
 }
@@ -650,7 +654,7 @@ function buildModalHTML(c) {
   // Naan au choix (formules)
   if(c.naanChoice){h+='<div class="custom-group"><label class="custom-label">🌯 Naan au choix</label><div class="sauce-grid">'+c.naanChoice.map(v=>'<button class="sauce-pill" data-key="naanChoice" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
   // Viande au choix (prix par item)
-  if(c.viandeChoice){h+='<div class="custom-group"><label class="custom-label">🍖 Viande au choix</label><div class="sauce-grid">'+c.viandeChoice.map(v=>'<button class="sauce-pill" data-key="viandeChoice" data-val="'+v.name+'">'+v.name+(v.price>0?'<span class="pill-price">+'+v.price.toFixed(2).replace('.',',')+'€</span>':'')+'</button>').join('')+'</div></div>';}
+  if(c.viandeChoice){const mx=c.viandeMax||1;h+='<div class="custom-group"><label class="custom-label">🍖 Viande au choix'+(mx>1?' <span class="custom-hint">('+mx+' au choix)</span>':'')+'</label><div class="sauce-grid">'+c.viandeChoice.map(v=>'<button class="sauce-pill multi" data-key="viandeChoice" data-val="'+v.name+'">'+v.name+(v.price>0?'<span class="pill-price">+'+v.price.toFixed(2).replace('.',',')+'€</span>':'')+'</button>').join('')+'</div></div>';}
   // Portion (tex mex, prix par taille)
   if(c.portion){h+='<div class="custom-group"><label class="custom-label">🍽️ Portion</label><div class="sauce-grid">'+c.portion.map(v=>'<button class="sauce-pill" data-key="portion" data-val="'+v.name+'">'+v.name+(v.price>0?'<span class="pill-price">+'+v.price.toFixed(2).replace('.',',')+'€</span>':'')+'</button>').join('')+'</div></div>';}
   // Nappage (milkshake)
@@ -766,6 +770,19 @@ function buildModalHTML(c) {
       });
     });
   });
+
+  // Viande au choix (multi, max = viandeMax, min 1)
+  $('custom-body').querySelectorAll('.sauce-pill[data-key="viandeChoice"]').forEach(p=>{
+    p.addEventListener('click',(ev)=>{ev.stopPropagation();
+      const v=p.dataset.val;const mx=(editing.custom&&editing.custom.viandeMax)||1;
+      if(!editState.viandeChoice)editState.viandeChoice=[];
+      const i=editState.viandeChoice.indexOf(v);
+      if(i>=0){if(editState.viandeChoice.length>1)editState.viandeChoice.splice(i,1);}
+      else{if(editState.viandeChoice.length>=mx)editState.viandeChoice.shift();editState.viandeChoice.push(v);}
+      $('custom-body').querySelectorAll('.sauce-pill[data-key="viandeChoice"]').forEach(x=>x.classList.toggle('active',editState.viandeChoice.includes(x.dataset.val)));
+      updatePrice();
+    });
+  });
 }
 
 function updateViandePills(){
@@ -787,7 +804,7 @@ function updatePrice(){
   const c=editing.custom||{};let p=editing.price;
   if(c.viandes?.prices){const i=(editState.nbViandes||1)-1;if(c.viandes.prices[i])p=c.viandes.prices[i];}
   if(c.menu&&editState.menu)p+=c.menu;
-  if(c.viandeChoice&&editState.viandeChoice){const v=c.viandeChoice.find(x=>x.name===editState.viandeChoice);if(v&&v.price)p+=v.price;}
+  if(c.viandeChoice&&editState.viandeChoice){editState.viandeChoice.forEach(nm=>{const v=c.viandeChoice.find(x=>x.name===nm);if(v&&v.price)p+=v.price;});}
   if(c.portion&&editState.portion){const v=c.portion.find(x=>x.name===editState.portion);if(v&&v.price)p+=v.price;}
   const xc=c.extrasConfig;
   const extrasTotal=xc?(editState.extras||[]).reduce((sum,name)=>sum+getExtraPrice(xc,name),0):0;
@@ -802,7 +819,7 @@ function confirmProduct(){
   const c=editing.custom||{};let p=editing.price;
   if(c.viandes?.prices){const i=(editState.nbViandes||1)-1;if(c.viandes.prices[i])p=c.viandes.prices[i];}
   if(c.menu&&editState.menu)p+=c.menu;
-  if(c.viandeChoice&&editState.viandeChoice){const v=c.viandeChoice.find(x=>x.name===editState.viandeChoice);if(v&&v.price)p+=v.price;}
+  if(c.viandeChoice&&editState.viandeChoice){editState.viandeChoice.forEach(nm=>{const v=c.viandeChoice.find(x=>x.name===nm);if(v&&v.price)p+=v.price;});}
   if(c.portion&&editState.portion){const v=c.portion.find(x=>x.name===editState.portion);if(v&&v.price)p+=v.price;}
   const xc=c.extrasConfig;
   const extrasTotal=xc?(editState.extras||[]).reduce((sum,name)=>sum+getExtraPrice(xc,name),0):0;
@@ -816,7 +833,7 @@ function confirmProduct(){
   if(c.burgerChoice&&editState.burgerChoice)l+=(l?' • ':'')+'Burger: '+editState.burgerChoice;
   if(c.burger2Choice&&editState.burger2Choice)l+=(l?' • ':'')+'Burger 2: '+editState.burger2Choice;
   if(c.naanChoice&&editState.naanChoice)l+=(l?' • ':'')+'Naan: '+editState.naanChoice;
-  if(c.viandeChoice&&editState.viandeChoice)l+=(l?' • ':'')+'Viande: '+editState.viandeChoice;
+  if(c.viandeChoice&&editState.viandeChoice&&editState.viandeChoice.length)l+=(l?' • ':'')+'Viande: '+editState.viandeChoice.join('+');
   if(c.portion&&editState.portion)l+=(l?' • ':'')+editState.portion;
   if(c.nappage&&editState.nappage)l+=(l?' • ':'')+'Nappage: '+editState.nappage;
   if(c.saveurChoice&&editState.saveurChoice)l+=(l?' • ':'')+'Saveur: '+editState.saveurChoice;
@@ -846,7 +863,7 @@ function confirmProduct(){
   if(c.burgerChoice&&editState.burgerChoice)comp.push({i:'🍔',k:'Burger',base:[editState.burgerChoice],extra:[]});
   if(c.burger2Choice&&editState.burger2Choice)comp.push({i:'🍔',k:'2ème burger',base:[editState.burger2Choice],extra:[]});
   if(c.naanChoice&&editState.naanChoice)comp.push({i:'🌯',k:'Naan',base:[editState.naanChoice],extra:[]});
-  if(c.viandeChoice&&editState.viandeChoice)comp.push({i:'🍖',k:'Viande',base:[editState.viandeChoice],extra:[]});
+  if(c.viandeChoice&&editState.viandeChoice&&editState.viandeChoice.length)comp.push({i:'🍖',k:'Viande',base:editState.viandeChoice,extra:[]});
   if(c.portion&&editState.portion)comp.push({i:'🍽️',k:'Portion',base:[editState.portion],extra:[]});
   if(c.nappage&&editState.nappage)comp.push({i:'🍫',k:'Nappage',base:[editState.nappage],extra:[]});
   if(c.saveurChoice&&editState.saveurChoice)comp.push({i:'🥤',k:'Saveur',base:[editState.saveurChoice],extra:[]});
