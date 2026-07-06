@@ -51,12 +51,12 @@ const SUPPS_KIDS = [];
 // BOISSONS / OPTIONS (listes de choix pour les modals)
 const DRINKS = ['Coca Cola','Coca Cola Cherry','Coca Cola Zéro','Fanta Orange','7up','Schweppes Agrum','Orangina','Lipton Ice tea Pêche','Oasis Tropical','Oasis Pomme Cassis Framboise','Perrier','Cristaline'];
 const PAINS = ['Cheese Naan','Pain Maison','Tortilla'];
-const COND = { list:['Salade','Tomate','Oignon','Olive Verte','Maïs'], max:5 };
+const COND = { list:['Salade','Tomate','Oignon','Olive Verte','Maïs'], max:5, default:['Salade','Tomate','Oignon'] };
 
 // MENU - Carte Bikers Food (Noisy-le-Sec)
 const MENU = [
   { id:'formules-menu-sandwich-gourmand', cat:'formules', name:'Menu Sandwich Gourmand', desc:'1 burger classique au choix + 1 Naan au choix , servi avec frites et boisson', price:13.90, emoji:'🍔', img:'formules-menu-sandwich-gourmand.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'formules-menu-tacos-gourmand', cat:'formules', name:'Menu Tacos Gourmand', desc:'1 burger classique au choix + 1 Tacos L au choix , servi avec 1 frites etboisson au choix.', price:13.90, emoji:'🆕', img:'formules-menu-tacos-gourmand.jpg', custom:{boissonMenu:DRINKS} },
+  { id:'formules-menu-tacos-gourmand', cat:'formules', name:'Menu Tacos Gourmand', desc:'1 burger classique au choix + 1 Tacos L au choix , servi avec 1 frites etboisson au choix.', price:13.90, emoji:'🌮', img:'formules-menu-tacos-gourmand.jpg', custom:{boissonMenu:DRINKS} },
   { id:'formules-menu-duo-burgers', cat:'formules', name:'Menu Duo Burgers', desc:'2 Burgers au choix, servi avec 1 frite + 1 boisson au choix.', price:12.90, emoji:'🍔', img:'formules-menu-duo-burgers.jpg', custom:{boissonMenu:DRINKS} },
   { id:'menus-duo-burgers-menu-b1-cheese-double-cheese', cat:'menus-duo-burgers', name:'Menu B1 (Cheese Double Cheese)', desc:'Double cheese + cheese, servi avec frites et boisson au choix.', price:10.00, emoji:'🍔', img:'menus-duo-burgers-menu-b1-cheese-double-cheese.jpg', custom:{boissonMenu:DRINKS} },
   { id:'menus-duo-burgers-menu-b2-big-burger-chicken-burge', cat:'menus-duo-burgers', name:'Menu B2 (Big Burger Chicken Burger)', desc:'Big burger et Chicken burger. Servi avec frites et boisson au choix.', price:13.00, emoji:'🍔', img:'menus-duo-burgers-menu-b2-big-burger-chicken-burge.jpg', custom:{boissonMenu:DRINKS} },
@@ -78,9 +78,9 @@ const MENU = [
   { id:'burgers-seuls-double-chesse-burger', cat:'burgers-seuls', name:'Double Chesse Burger', desc:'Pain simple, 2 steaks, 2 cheddar, ketchup, moutarde, oignon et cornichons.', price:4.00, emoji:'🍔', img:'menus-burgers-menu-double-cheese.jpg', custom:{menu:3.50} },
   { id:'burgers-seuls-chicken-burger', cat:'burgers-seuls', name:'Chicken Burger', desc:'Pain sésame, tenders, cheddar, salade, sauce mayo.', price:6.00, emoji:'🍔', img:'menus-burgers-menu-chicken-burger.jpg', custom:{menu:2.50} },
   { id:'burgers-seuls-fish-burger', cat:'burgers-seuls', name:'Fish Burger', desc:'Pain simple, poisson pané, cheddar, sauce Fish.', price:4.90, emoji:'🍔', img:'menus-burgers-menu-fish-burger.jpg', custom:{menu:3.00} },
-  { id:'naan-burgers-seuls-naan-burger-giant', cat:'naan-burgers-seuls', name:'Naan Burger Giant', desc:'Pain Naan, 2 steaks, cheddar, salade, sauce Giant.', price:9.90, emoji:'🆕', img:'menu-naan-burgers-menu-naan-burger-giant.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
-  { id:'naan-burgers-seuls-naan-burger-big', cat:'naan-burgers-seuls', name:'Naan Burger Big', desc:'Pain Naan, 2 steaks, cheddar, oignons, cornichons, salade, sauce Big.', price:10.90, emoji:'🆕', img:'menu-naan-burgers-menu-naan-burger-big.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
-  { id:'naan-burgers-seuls-naan-burger-chicken', cat:'naan-burgers-seuls', name:'Naan Burger Chicken', desc:'Pain Naan, Filet de poulet pané, cheddar, salade, tomate, oignon.', price:10.90, emoji:'🆕', img:'menu-naan-burgers-menu-naan-burger-chicken.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
+  { id:'naan-burgers-seuls-naan-burger-giant', cat:'naan-burgers-seuls', name:'Naan Burger Giant', desc:'Pain Naan, 2 steaks, cheddar, salade, sauce Giant.', price:9.90, emoji:'🫓', img:'menu-naan-burgers-menu-naan-burger-giant.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
+  { id:'naan-burgers-seuls-naan-burger-big', cat:'naan-burgers-seuls', name:'Naan Burger Big', desc:'Pain Naan, 2 steaks, cheddar, oignons, cornichons, salade, sauce Big.', price:10.90, emoji:'🫓', img:'menu-naan-burgers-menu-naan-burger-big.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
+  { id:'naan-burgers-seuls-naan-burger-chicken', cat:'naan-burgers-seuls', name:'Naan Burger Chicken', desc:'Pain Naan, Filet de poulet pané, cheddar, salade, tomate, oignon.', price:10.90, emoji:'🫓', img:'menu-naan-burgers-menu-naan-burger-chicken.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
   { id:'menu-naandwich-menu-naan-taandori', cat:'menu-naandwich', name:'Naan Taandori', desc:'Poulet mariné au Tandoori, cheddar, crudités et sauce au choix.', price:6.90, emoji:'🌯', img:'menu-naandwich-menu-naan-taandori.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
   { id:'menu-naandwich-menu-naan-triple-steaks', cat:'menu-naandwich', name:'Naan Triple steaks', desc:'3 Steaks, cheddar, œuf et bacon de Bœuf, crudités et sauce au choix.', price:6.90, emoji:'🌯', img:'menu-naandwich-menu-naan-triple-steaks.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
   { id:'menu-naandwich-menu-naan-suprême', cat:'menu-naandwich', name:'Naan Suprême', desc:'2 steaks, Escalope de poulet, œuf, bacon et cheddar, crudités et sauce au choix.', price:6.90, emoji:'🌯', img:'menu-naandwich-menu-naan-suprême.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
@@ -161,8 +161,8 @@ const PAINS_SANDWICH = ['Pain Maison','Tortilla'];
   if(byId['formules-menu-duo-burgers'])byId['formules-menu-duo-burgers'].custom={burgerChoice:GOURMAND_BURGERS,burger2Choice:GOURMAND_BURGERS,sauces:sauce2,boissonMenu:DRINKS};
   // 2) Duo Burgers B1..B8 : sauces + boisson uniquement
   MENU.filter(m=>m.cat==='menus-duo-burgers').forEach(m=>{ m.custom={sauces:sauce2,boissonMenu:DRINKS}; });
-  // 3) Burgers / Smash / Naan Burgers : ajoute le choix de sauces (la boisson reste via l'option "En menu")
-  MENU.filter(m=>['burgers-seuls','smash-burgers-seuls','naan-burgers-seuls'].includes(m.cat)).forEach(m=>{ m.custom=Object.assign({},m.custom,{sauces:sauce2}); });
+  // 3) Burgers / Smash / Naan Burgers : sauces + suppléments payants (boisson via "En menu")
+  MENU.filter(m=>['burgers-seuls','smash-burgers-seuls','naan-burgers-seuls'].includes(m.cat)).forEach(m=>{ m.custom=Object.assign({},m.custom,{sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:NAAN_SUPPS}}); });
   // 4) Naan'Dwich : pain + condiments (déjà) + sauces + suppléments payants (boisson via "En menu")
   MENU.filter(m=>m.cat==='menu-naandwich').forEach(m=>{ m.custom=Object.assign({},m.custom,{sauces:sauce2,extrasConfig:{sauces:false,viandes:false,sauceList:[],supps:NAAN_SUPPS}}); });
   // 5) Sandwichs : pain (Pain Maison/Tortilla) + condiments + sauces + suppléments payants (boisson via "En menu")
@@ -568,7 +568,7 @@ function openModal(itemId, existingCartItem) {
     if(c.nappage)editState.nappage=c.nappage[0];
     if(c.saveurChoice)editState.saveurChoice=c.saveurChoice[0];
     if(c.pain)editState.pain=c.pain[0];
-    if(c.condiments)editState.condiments=[...c.condiments.list];
+    if(c.condiments)editState.condiments=[...(c.condiments.default||c.condiments.list)];
     if(c.plat)editState.plat=c.plat[0];
     if(c.crudites)editState.crudites='Salade+Tomates+Oignons';
     if(c.menu){editState.menu=false;editState.boissonMenu=DRINKS[0];}
@@ -685,7 +685,9 @@ function buildModalHTML(c) {
   if(c.plat){h+='<div class="custom-group"><label class="custom-label">🍽️ Plat</label><div class="toggle-row">'+c.plat.map(v=>'<button class="toggle-btn" data-key="plat" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
   // Sauces (multi-count)
   if(c.sauces){h+='<div class="custom-group"><label class="custom-label">🥫 Sauces <span class="custom-hint">('+(c.sauces.count||2)+' gratuites)</span></label><div class="sauce-grid">'+c.sauces.list.map(s=>'<button class="sauce-pill multi" data-key="sauces" data-val="'+s+'">'+s+'</button>').join('')+'</div></div>';}
-  // Extras (générés dynamiquement depuis extrasConfig)
+  // Boisson menu standalone (only for items without menu toggle, like tacos menus)
+  if(c.boissonMenu&&!c.menu){h+='<div class="custom-group"><label class="custom-label">🥤 Boisson</label><div class="sauce-grid">'+c.boissonMenu.map(d=>'<button class="sauce-pill" data-key="boissonMenu" data-val="'+d+'">'+d+'</button>').join('')+'</div></div>';}
+  // Extras / Suppléments (toujours en dernier)
   const xc=c.extrasConfig;
   if(xc && (xc.sauces || xc.viandes || (xc.supps&&xc.supps.length))){
     let e='<div class="extras-head"><span class="extras-title">✨ Extras</span><span class="extras-note">Optionnel · en supplément</span></div>';
@@ -694,8 +696,6 @@ function buildModalHTML(c) {
     if(xc.supps&&xc.supps.length){e+='<div class="extras-block"><label class="custom-label sm">➕ Suppléments</label><div class="sauce-grid">'+xc.supps.map(x=>'<button class="sauce-pill multi" data-key="extras" data-val="'+x.name+'">'+x.name+'<span class="pill-price">+'+x.price.toFixed(2).replace('.',',')+'€</span></button>').join('')+'</div></div>';}
     h+='<div class="custom-group extras-group">'+e+'</div>';
   }
-  // Boisson menu standalone (only for items without menu toggle, like tacos menus)
-  if(c.boissonMenu&&!c.menu){h+='<div class="custom-group"><label class="custom-label">🥤 Boisson</label><div class="sauce-grid">'+c.boissonMenu.map(d=>'<button class="sauce-pill" data-key="boissonMenu" data-val="'+d+'">'+d+'</button>').join('')+'</div></div>';}
   // No options
   const hasOpts=c.viandes||c.sauces||c.gratinage||c.accompagnement||c.crudites||c.plat||c.boissonMenu||c.menu||c.extrasConfig||c.pain||c.condiments||c.burgerChoice||c.burger2Choice||c.naanChoice||c.viandeChoice||c.portion||c.nappage||c.saveurChoice;
   if(!hasOpts){h+='<div class="custom-group" style="text-align:center;border-bottom:0"><p style="color:var(--text-dim);font-size:0.9rem;">'+(editing.desc||'')+'</p></div>';}
