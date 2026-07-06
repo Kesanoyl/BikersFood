@@ -48,8 +48,10 @@ const SUPPS_KIDS = [];
 // extrasConfig : { sauces:bool, viandes:bool, saucePrice, viandePrice, supps:array, sauceList }
 // On génère les extras dynamiquement dans le modal
 
-// BOISSONS (liste de choix pour les menus)
+// BOISSONS / OPTIONS (listes de choix pour les modals)
 const DRINKS = ['Coca Cola','Coca Cola Cherry','Coca Cola Zéro','Fanta Orange','7up','Schweppes Agrum','Orangina','Lipton Ice tea Pêche','Oasis Tropical','Oasis Pomme Cassis Framboise','Perrier','Cristaline'];
+const PAINS = ['Cheese Naan','Pain Maison','Tortilla'];
+const COND = { list:['Salade','Tomate','Oignon','Olive Verte','Maïs'], max:5 };
 
 // MENU - Carte Bikers Food (Noisy-le-Sec)
 const MENU = [
@@ -64,58 +66,43 @@ const MENU = [
   { id:'menus-duo-burgers-menu-b6-1-chicken-burger-double-', cat:'menus-duo-burgers', name:'Menu B6 (1 Chicken Burger Double cheese)', desc:'1 chicken burger + 1 double cheese servi avec 1 frite et boisson au choix', price:13.00, emoji:'🍔', img:'menus-duo-burgers-menu-b6-1-chicken-burger-double-.jpg', custom:{boissonMenu:DRINKS} },
   { id:'menus-duo-burgers-menu-b7-big-burger-giiant', cat:'menus-duo-burgers', name:'Menu B7 (Big Burger Giiant)', desc:'Big burger + Giiant servi avec 1 frite et boisson au choix.', price:12.50, emoji:'🍔', img:'menus-duo-burgers-menu-b7-big-burger-giiant.jpg', custom:{boissonMenu:DRINKS} },
   { id:'menus-duo-burgers-menu-b8-2-giiant-bugers', cat:'menus-duo-burgers', name:'Menu B8 (2 Giiant Bugers)', desc:'2 Giiants burger servi avec 1 frite et boissonau choix', price:12.50, emoji:'🍔', img:'menus-duo-burgers-menu-b8-2-giiant-bugers.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-smash-burgers-menu-beef-smash', cat:'menu-smash-burgers', name:'Menu Beef Smash', desc:'Potato buns, 2 steaks smashés, cheddar, salade, tomate, sauce smash, servi avec 1 frite + 1 boisson au choix.', price:11.50, emoji:'🍔', img:'menu-smash-burgers-menu-beef-smash.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-smash-burgers-menu-bikers-smash', cat:'menu-smash-burgers', name:'Menu Bikers Smash', desc:'Potato buns, 2 steak smashés, bacon de bœuf, cheddar, salade, cornichons, oignon, sauce smash, servi avec 1 frite + 1 boisson au choix.', price:12.50, emoji:'🍔', img:'menu-smash-burgers-menu-bikers-smash.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-smash-burgers-menu-chicken-smash', cat:'menu-smash-burgers', name:'Menu Chicken Smash', desc:'Potato buns, Filet de poulet pané, cheddar, salade, tomate, sauce smash, servi avec 1 frite + 1 boisson au choix.', price:12.50, emoji:'🍔', img:'menu-smash-burgers-menu-chicken-smash.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-tasty-burger', cat:'menus-burgers', name:'Menu Tasty Burger', desc:'1 steak 90 gr , Emmental, salade, tomates, oignons et sauce tasty. Servi avec frites et boisson au choix.', price:9.90, emoji:'🍔', img:'menus-burgers-menu-tasty-burger.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-chicken-burger', cat:'menus-burgers', name:'Menu Chicken Burger', desc:'2 tenders, salade, Cheddar, bacon et sauce mayonnaise. Servi avec frites et boisson au choix.', price:8.50, emoji:'🍔', img:'menus-burgers-menu-chicken-burger.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-double-cheese-bacon', cat:'menus-burgers', name:'Menu Double Cheese Bacon', desc:'2 steaks, Cheddar, bacon, ketchup, moutarde, oignons et cornichons. Servi avec frites et boisson au choix.', price:8.00, emoji:'🍔', img:'menus-burgers-menu-double-cheese-bacon.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-double-cheese', cat:'menus-burgers', name:'Menu Double Cheese', desc:'2 steaks, cheddar, ketchup, moutarde, oignons et cornichons. Servi avec frites et boisson au choix.', price:7.50, emoji:'🍔', img:'menus-burgers-menu-double-cheese.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-triple-cheese', cat:'menus-burgers', name:'Menu Triple Cheese', desc:'3 steaks, cheddar, ketchup, moutarde, oignons et cornichons. Servi avec frites et boisson au choix.', price:8.50, emoji:'🍔', img:'menus-burgers-menu-triple-cheese.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-big-burger', cat:'menus-burgers', name:'Menu Big Burger', desc:'Pain double, 2 steaks, salade, Cheddar, oignons, cornichons. Servi avec frites et boisson au choix.', price:8.00, emoji:'🍔', img:'menus-burgers-menu-big-burger.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-cheese-burger', cat:'menus-burgers', name:'Menu Cheese Burger', desc:'Steak, Cheddar, ketchup, moutarde, oignons et cornichons. Servi avec frites et boisson au choix.', price:6.50, emoji:'🍔', img:'menus-burgers-menu-cheese-burger.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-giiant-burger', cat:'menus-burgers', name:'Menu Giiant Burger', desc:'Pain simple , 2 steaks, 1 cheddar, sauce Giiant et salade iceberg servi avec 1 frite et boisson au choix', price:8.00, emoji:'🍔', img:'menus-burgers-menu-giiant-burger.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-burgers-menu-fish-burger', cat:'menus-burgers', name:'Menu Fish Burger', desc:'Pain simple, poisson pané, cheddar, sauce Fish, servi avec 1 frite + 1 boisson au choix.', price:7.90, emoji:'🍔', img:'menus-burgers-menu-fish-burger.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naan-burgers-menu-naan-burger-giant', cat:'menu-naan-burgers', name:'Menu Naan Burger Giant', desc:'Pain Naan, 2 steaks, cheddar, salade,sauce Giant, servi avec 1 frite + 1 boisson au choix.', price:12.90, emoji:'🆕', img:'menu-naan-burgers-menu-naan-burger-giant.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naan-burgers-menu-naan-burger-big', cat:'menu-naan-burgers', name:'Menu Naan Burger Big', desc:'Pain Naan, 2 steaks, cheddar, oignons, salade, cornichons, sauce Big , servi avec 1 frite + 1 boisson au choix.', price:13.90, emoji:'🆕', img:'menu-naan-burgers-menu-naan-burger-big.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naan-burgers-menu-naan-burger-chicken', cat:'menu-naan-burgers', name:'Menu Naan Burger Chicken', desc:'Pain Naan, Filet de poulet pané, cheddar, salade, oignon, tomate, sauce mayo, servi avec 1 frite + 1 boisson au choix.', price:13.90, emoji:'🆕', img:'menu-naan-burgers-menu-naan-burger-chicken.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-taandori', cat:'menu-naandwich', name:'Menu Naan Taandori', desc:'Poulet mariné au Tandoori, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-taandori.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-triple-steaks', cat:'menu-naandwich', name:'Menu Naan Triple steaks', desc:'3 Steaks, cheddar, œuf et bacon de Bœuf, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-triple-steaks.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-suprême', cat:'menu-naandwich', name:'Menu Naan Suprême', desc:'2 steaks, Escalope de poulet, œuf, bacon et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-suprême.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-fondu', cat:'menu-naandwich', name:'Menu Naan Fondu', desc:'Escalope de poulet, Mozzarela, poulet fumé, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-fondu.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-boursin', cat:'menu-naandwich', name:'Menu Naan Boursin', desc:'Escalope de poulet, Boursin et cheddar,crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-boursin.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-quattro', cat:'menu-naandwich', name:'Menu Naan Quattro', desc:'4 steaks, bacon et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:10.90, emoji:'🌯', img:'menu-naandwich-menu-naan-quattro.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-escalope', cat:'menu-naandwich', name:'Menu Naan Escalope', desc:'Escalope de Poulet, Oignon Frit, cheddar,crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-escalope.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-cordon', cat:'menu-naandwich', name:'Menu Naan Cordon', desc:'2 steaks, Cordon Bleu, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-cordon.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-tornado', cat:'menu-naandwich', name:'Menu Naan Tornado', desc:'2 steaks, Tenders, œuf, Poulet fumé et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:10.90, emoji:'🌯', img:'menu-naandwich-menu-naan-tornado.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-super-trio', cat:'menu-naandwich', name:'Menu Naan Super Trio', desc:'3 steaks, œuf, Boursin, poulet fuméet cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-super-trio.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menu-naandwich-menu-naan-farmer', cat:'menu-naandwich', name:'Menu Naan Farmer', desc:'Escalope de poulet, Vache qui Rit,crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix. Menu Naan Crispy Tenders, galette de pomme de terre, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-farmer.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-triple-steaks', cat:'menus-sandwichs', name:'Menu Triple Steaks', desc:'Pain au choix, 3 steaks, œuf, bacon de bœuf, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-triple-steaks.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-super-trio', cat:'menus-sandwichs', name:'Menu Super Trio', desc:'Pain au choix, 3 steaks, œuf, cheddar, poulet fumé, Boursin, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-super-trio.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-tornado', cat:'menus-sandwichs', name:'Menu Tornado', desc:'Pain au choix, 2 steaks, tenders, oeuf, poulet fumé, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-tornado.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-chicken-tandoori', cat:'menus-sandwichs', name:'Menu Chicken Tandoori', desc:'Pain au choix, Emincé de poulet Tandoori et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-chicken-tandoori.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-cordon', cat:'menus-sandwichs', name:'Menu Cordon', desc:'Pain au choix, 2 steaks, cordon bleu, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-cordon.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-escalope-du-chef', cat:'menus-sandwichs', name:'Menu Escalope Du chef', desc:'Pain au choix, Escalope de poulet oignons frits, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-escalope-du-chef.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-boursin', cat:'menus-sandwichs', name:'Menu Boursin', desc:'Pain au choix, escalope, sauce Boursin, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-boursin.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-quattro', cat:'menus-sandwichs', name:'Menu Quattro', desc:'Pain au choix, 4 steaks, bacon de bœuf, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-quattro.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-farmer', cat:'menus-sandwichs', name:'Menu Farmer', desc:'Pain au choix, escalope de poulet, poulet fumé et Vache Qui Rit, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-farmer.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-fondu', cat:'menus-sandwichs', name:'Menu Fondu', desc:'Pain au choix, escalope de poulet, poulet fumée et Mozzarella, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-fondu.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'menus-sandwichs-menu-suprême', cat:'menus-sandwichs', name:'Menu Suprême', desc:'Pain au choix, 2 steaks, escalope de poulet, bacon, de bœuf, œuf, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix. 🆕Menu Crispy🆕 Pain au choix, tenders, galette de pomme de terre, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-suprême.jpg', custom:{boissonMenu:DRINKS} },
-  { id:'smash-burgers-seuls-beef-smash', cat:'smash-burgers-seuls', name:'Beef Smash', desc:'Potato buns, 2 steaks smashés, cheddar, salade, tomate, sauce smash.', price:8.90, emoji:'🍔', img:'smash-burgers-seuls-beef-smash.jpg' },
-  { id:'smash-burgers-seuls-bikers-smash', cat:'smash-burgers-seuls', name:'Bikers Smash', desc:'Potato buns, 2 steak smashés, bacon de bœuf, cheddar, salade, cornichons, oignon, sauce smash', price:8.90, emoji:'🍔', img:'smash-burgers-seuls-bikers-smash.jpg' },
-  { id:'smash-burgers-seuls-chicken-smash', cat:'smash-burgers-seuls', name:'Chicken Smash', desc:'Potato buns, Filet de poulet pané, cheddar, salade, tomate, sauce smash.', price:8.90, emoji:'🍔', img:'smash-burgers-seuls-chicken-smash.jpg' },
-  { id:'burgers-seuls-giant-burger', cat:'burgers-seuls', name:'Giant Burger', desc:'Pain simple , 2 steaks, 1 cheddar, sauce giant et salade', price:5.00, emoji:'🍔', img:'burgers-seuls-giant-burger.jpg' },
-  { id:'burgers-seuls-big-burger', cat:'burgers-seuls', name:'Big Burger', desc:'Pain double sésame, 2 steaks, cheddar, sauce big, salade, oignon et cornichons.', price:5.50, emoji:'🍔', img:'burgers-seuls-big-burger.jpg' },
-  { id:'burgers-seuls-triple-cheese', cat:'burgers-seuls', name:'Triple Cheese', desc:'Pain simple,3 steaks, ketchup, moutarde, oignonset cornichons', price:6.00, emoji:'🍔', img:'burgers-seuls-triple-cheese.jpg' },
-  { id:'burgers-seuls-tasty-burger', cat:'burgers-seuls', name:'Tasty Burger', desc:'Pain sésame, 1 steak 90grs, sauce tasty, emmental, salade, oignons rouge et tomate.', price:7.50, emoji:'🍔', img:'burgers-seuls-tasty-burger.jpg' },
-  { id:'burgers-seuls-cheese-burger', cat:'burgers-seuls', name:'Cheese Burger', desc:'Pain simple, 1 steak, cheddar, ketchup, moutarde, oignon et cornichons.', price:3.00, emoji:'🍔', img:'burgers-seuls-cheese-burger.jpg' },
-  { id:'burgers-seuls-double-cheese-bacon', cat:'burgers-seuls', name:'Double Cheese Bacon', desc:'Pain simple, 2 steaks, 2 cheddar, bacon, ketchup, moutarde, oignon et cornichon.', price:5.00, emoji:'🍔', img:'burgers-seuls-double-cheese-bacon.jpg' },
-  { id:'burgers-seuls-double-chesse-burger', cat:'burgers-seuls', name:'Double Chesse Burger', desc:'Pain simple, 2 steaks, 2 cheddar, ketchup, moutarde, oignon et cornichons.', price:4.00, emoji:'🍔', img:'burgers-seuls-double-chesse-burger.jpg' },
-  { id:'burgers-seuls-chicken-burger', cat:'burgers-seuls', name:'Chicken Burger', desc:'Pain sésame, tenders, cheddar, salade, sauce mayo.', price:6.00, emoji:'🍔', img:'burgers-seuls-chicken-burger.jpg' },
-  { id:'burgers-seuls-fish-burger', cat:'burgers-seuls', name:'Fish Burger', desc:'Pain simple, poisson pané, cheddar, sauce Fish.', price:4.90, emoji:'🍔', img:'burgers-seuls-fish-burger.jpg' },
-  { id:'naan-burgers-seuls-naan-burger-giant', cat:'naan-burgers-seuls', name:'Naan Burger Giant', desc:'Pain Naan, 2 steaks, cheddar, salade, sauce Giant.', price:9.90, emoji:'🆕', img:'naan-burgers-seuls-naan-burger-giant.jpg' },
-  { id:'naan-burgers-seuls-naan-burger-big', cat:'naan-burgers-seuls', name:'Naan Burger Big', desc:'Pain Naan, 2 steaks, cheddar, oignons, cornichons, salade, sauce Big.', price:10.90, emoji:'🆕', img:'naan-burgers-seuls-naan-burger-big.jpg' },
-  { id:'naan-burgers-seuls-naan-burger-chicken', cat:'naan-burgers-seuls', name:'Naan Burger Chicken', desc:'Pain Naan, Filet de poulet pané, cheddar, salade, tomate, oignon.', price:10.90, emoji:'🆕', img:'naan-burgers-seuls-naan-burger-chicken.jpg' },
+  { id:'smash-burgers-seuls-beef-smash', cat:'smash-burgers-seuls', name:'Beef Smash', desc:'Potato buns, 2 steaks smashés, cheddar, salade, tomate, sauce smash.', price:8.90, emoji:'🍔', img:'smash-burgers-seuls-beef-smash.jpg', custom:{menu:2.60} },
+  { id:'smash-burgers-seuls-bikers-smash', cat:'smash-burgers-seuls', name:'Bikers Smash', desc:'Potato buns, 2 steak smashés, bacon de bœuf, cheddar, salade, cornichons, oignon, sauce smash', price:8.90, emoji:'🍔', img:'smash-burgers-seuls-bikers-smash.jpg', custom:{menu:3.60} },
+  { id:'smash-burgers-seuls-chicken-smash', cat:'smash-burgers-seuls', name:'Chicken Smash', desc:'Potato buns, Filet de poulet pané, cheddar, salade, tomate, sauce smash.', price:8.90, emoji:'🍔', img:'smash-burgers-seuls-chicken-smash.jpg', custom:{menu:3.60} },
+  { id:'burgers-seuls-giant-burger', cat:'burgers-seuls', name:'Giant Burger', desc:'Pain simple , 2 steaks, 1 cheddar, sauce giant et salade', price:5.00, emoji:'🍔', img:'burgers-seuls-giant-burger.jpg', custom:{menu:3.00} },
+  { id:'burgers-seuls-big-burger', cat:'burgers-seuls', name:'Big Burger', desc:'Pain double sésame, 2 steaks, cheddar, sauce big, salade, oignon et cornichons.', price:5.50, emoji:'🍔', img:'burgers-seuls-big-burger.jpg', custom:{menu:2.50} },
+  { id:'burgers-seuls-triple-cheese', cat:'burgers-seuls', name:'Triple Cheese', desc:'Pain simple,3 steaks, ketchup, moutarde, oignonset cornichons', price:6.00, emoji:'🍔', img:'burgers-seuls-triple-cheese.jpg', custom:{menu:2.50} },
+  { id:'burgers-seuls-tasty-burger', cat:'burgers-seuls', name:'Tasty Burger', desc:'Pain sésame, 1 steak 90grs, sauce tasty, emmental, salade, oignons rouge et tomate.', price:7.50, emoji:'🍔', img:'burgers-seuls-tasty-burger.jpg', custom:{menu:2.40} },
+  { id:'burgers-seuls-cheese-burger', cat:'burgers-seuls', name:'Cheese Burger', desc:'Pain simple, 1 steak, cheddar, ketchup, moutarde, oignon et cornichons.', price:3.00, emoji:'🍔', img:'burgers-seuls-cheese-burger.jpg', custom:{menu:3.50} },
+  { id:'burgers-seuls-double-cheese-bacon', cat:'burgers-seuls', name:'Double Cheese Bacon', desc:'Pain simple, 2 steaks, 2 cheddar, bacon, ketchup, moutarde, oignon et cornichon.', price:5.00, emoji:'🍔', img:'burgers-seuls-double-cheese-bacon.jpg', custom:{menu:3.00} },
+  { id:'burgers-seuls-double-chesse-burger', cat:'burgers-seuls', name:'Double Chesse Burger', desc:'Pain simple, 2 steaks, 2 cheddar, ketchup, moutarde, oignon et cornichons.', price:4.00, emoji:'🍔', img:'burgers-seuls-double-chesse-burger.jpg', custom:{menu:3.50} },
+  { id:'burgers-seuls-chicken-burger', cat:'burgers-seuls', name:'Chicken Burger', desc:'Pain sésame, tenders, cheddar, salade, sauce mayo.', price:6.00, emoji:'🍔', img:'burgers-seuls-chicken-burger.jpg', custom:{menu:2.50} },
+  { id:'burgers-seuls-fish-burger', cat:'burgers-seuls', name:'Fish Burger', desc:'Pain simple, poisson pané, cheddar, sauce Fish.', price:4.90, emoji:'🍔', img:'burgers-seuls-fish-burger.jpg', custom:{menu:3.00} },
+  { id:'naan-burgers-seuls-naan-burger-giant', cat:'naan-burgers-seuls', name:'Naan Burger Giant', desc:'Pain Naan, 2 steaks, cheddar, salade, sauce Giant.', price:9.90, emoji:'🆕', img:'naan-burgers-seuls-naan-burger-giant.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
+  { id:'naan-burgers-seuls-naan-burger-big', cat:'naan-burgers-seuls', name:'Naan Burger Big', desc:'Pain Naan, 2 steaks, cheddar, oignons, cornichons, salade, sauce Big.', price:10.90, emoji:'🆕', img:'naan-burgers-seuls-naan-burger-big.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
+  { id:'naan-burgers-seuls-naan-burger-chicken', cat:'naan-burgers-seuls', name:'Naan Burger Chicken', desc:'Pain Naan, Filet de poulet pané, cheddar, salade, tomate, oignon.', price:10.90, emoji:'🆕', img:'naan-burgers-seuls-naan-burger-chicken.jpg', custom:{menu:3.00,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-taandori', cat:'menu-naandwich', name:'Menu Naan Taandori', desc:'Poulet mariné au Tandoori, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-taandori.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-triple-steaks', cat:'menu-naandwich', name:'Menu Naan Triple steaks', desc:'3 Steaks, cheddar, œuf et bacon de Bœuf, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-triple-steaks.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-suprême', cat:'menu-naandwich', name:'Menu Naan Suprême', desc:'2 steaks, Escalope de poulet, œuf, bacon et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-suprême.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-fondu', cat:'menu-naandwich', name:'Menu Naan Fondu', desc:'Escalope de poulet, Mozzarela, poulet fumé, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-fondu.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-boursin', cat:'menu-naandwich', name:'Menu Naan Boursin', desc:'Escalope de poulet, Boursin et cheddar,crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-boursin.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-quattro', cat:'menu-naandwich', name:'Menu Naan Quattro', desc:'4 steaks, bacon et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:10.90, emoji:'🌯', img:'menu-naandwich-menu-naan-quattro.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-escalope', cat:'menu-naandwich', name:'Menu Naan Escalope', desc:'Escalope de Poulet, Oignon Frit, cheddar,crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-escalope.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-cordon', cat:'menu-naandwich', name:'Menu Naan Cordon', desc:'2 steaks, Cordon Bleu, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-cordon.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-tornado', cat:'menu-naandwich', name:'Menu Naan Tornado', desc:'2 steaks, Tenders, œuf, Poulet fumé et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:10.90, emoji:'🌯', img:'menu-naandwich-menu-naan-tornado.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-super-trio', cat:'menu-naandwich', name:'Menu Naan Super Trio', desc:'3 steaks, œuf, Boursin, poulet fuméet cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-super-trio.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menu-naandwich-menu-naan-farmer', cat:'menu-naandwich', name:'Menu Naan Farmer', desc:'Escalope de poulet, Vache qui Rit,crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix. Menu Naan Crispy Tenders, galette de pomme de terre, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.90, emoji:'🌯', img:'menu-naandwich-menu-naan-farmer.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-triple-steaks', cat:'menus-sandwichs', name:'Menu Triple Steaks', desc:'Pain au choix, 3 steaks, œuf, bacon de bœuf, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-triple-steaks.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-super-trio', cat:'menus-sandwichs', name:'Menu Super Trio', desc:'Pain au choix, 3 steaks, œuf, cheddar, poulet fumé, Boursin, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-super-trio.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-tornado', cat:'menus-sandwichs', name:'Menu Tornado', desc:'Pain au choix, 2 steaks, tenders, oeuf, poulet fumé, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-tornado.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-chicken-tandoori', cat:'menus-sandwichs', name:'Menu Chicken Tandoori', desc:'Pain au choix, Emincé de poulet Tandoori et cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-chicken-tandoori.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-cordon', cat:'menus-sandwichs', name:'Menu Cordon', desc:'Pain au choix, 2 steaks, cordon bleu, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-cordon.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-escalope-du-chef', cat:'menus-sandwichs', name:'Menu Escalope Du chef', desc:'Pain au choix, Escalope de poulet oignons frits, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-escalope-du-chef.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-boursin', cat:'menus-sandwichs', name:'Menu Boursin', desc:'Pain au choix, escalope, sauce Boursin, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-boursin.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-quattro', cat:'menus-sandwichs', name:'Menu Quattro', desc:'Pain au choix, 4 steaks, bacon de bœuf, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-quattro.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-farmer', cat:'menus-sandwichs', name:'Menu Farmer', desc:'Pain au choix, escalope de poulet, poulet fumé et Vache Qui Rit, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-farmer.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-fondu', cat:'menus-sandwichs', name:'Menu Fondu', desc:'Pain au choix, escalope de poulet, poulet fumée et Mozzarella, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-fondu.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
+  { id:'menus-sandwichs-menu-suprême', cat:'menus-sandwichs', name:'Menu Suprême', desc:'Pain au choix, 2 steaks, escalope de poulet, bacon, de bœuf, œuf, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix. 🆕Menu Crispy🆕 Pain au choix, tenders, galette de pomme de terre, cheddar, crudités et sauce au choix, servi avec 1 frite + 1 boisson au choix.', price:9.50, emoji:'🌯', img:'menus-sandwichs-menu-suprême.jpg', custom:{boissonMenu:DRINKS,pain:PAINS,condiments:COND} },
   { id:'tacos-seuls-tacos-m', cat:'tacos-seuls', name:'Tacos M', desc:'1 viande au choix et sauce fromagère servi avec 1 boisson au choix', price:8.90, emoji:'🥤', img:'tacos-seuls-tacos-m.jpg', custom:{boissonMenu:DRINKS} },
   { id:'tacos-seuls-tacos-l', cat:'tacos-seuls', name:'Tacos L', desc:'2 viandes au choix et sauce fromagère servi avec 1 boisson au choix', price:9.90, emoji:'🥤', img:'tacos-seuls-tacos-l.jpg', custom:{boissonMenu:DRINKS} },
   { id:'tacos-seuls-tacos-xl', cat:'tacos-seuls', name:'Tacos XL', desc:'3 viandes au choix et sauce fromagère servi avec 1 boisson au choix.', price:10.90, emoji:'🥤', img:'tacos-seuls-tacos-xl.jpg', custom:{boissonMenu:DRINKS} },
@@ -144,21 +131,18 @@ const MENU = [
 const CAT_NAMES = {
   'formules':'🍔 Formules',
   'menus-duo-burgers':'🍔 Menus Duo Burgers',
-  'menu-smash-burgers':'🔥 Menus Smash',
-  'menus-burgers':'🍔 Menus Burgers',
-  'menu-naan-burgers':'🫓 Menus Naan Burgers',
-  'menu-naandwich':'🌯 Menus Naan\'Dwich',
-  'menus-sandwichs':'🥖 Menus Sandwichs',
   'smash-burgers-seuls':'🔥 Smash Burgers',
   'burgers-seuls':'🍔 Burgers',
   'naan-burgers-seuls':'🫓 Naan Burgers',
+  'menu-naandwich':'🌯 Naan\'Dwich',
+  'menus-sandwichs':'🥖 Sandwichs',
   'tacos-seuls':'🌮 Tacos',
   'menus-kids':'🧸 Menu Enfant',
   'tex-mex':'🍗 Tex Mex',
   'desserts':'🍩 Desserts',
   'boissons':'🥤 Boissons'
 };
-const CAT_ORDER = ['formules','menus-duo-burgers','menu-smash-burgers','menus-burgers','menu-naan-burgers','menu-naandwich','menus-sandwichs','smash-burgers-seuls','burgers-seuls','naan-burgers-seuls','tacos-seuls','menus-kids','tex-mex','desserts','boissons'];
+const CAT_ORDER = ['formules','menus-duo-burgers','smash-burgers-seuls','burgers-seuls','naan-burgers-seuls','menu-naandwich','menus-sandwichs','tacos-seuls','menus-kids','tex-mex','desserts','boissons'];
 
 // ═══ STATE ═══════════════════════════════════════════════════
 let cart = JSON.parse(localStorage.getItem('bikersfood_cart') || '[]');
@@ -533,6 +517,8 @@ function openModal(itemId, existingCartItem) {
     if(c.sauces){editState.sauceCount=c.sauces.count||2;editState.sauces=[c.sauces.list[0]];if(c.sauces.count>1)editState.sauces.push(c.sauces.list[1]||c.sauces.list[0]);}
     if(c.accompagnement)editState.accompagnement=Array.isArray(c.accompagnement)?c.accompagnement[0]:c.accompagnement;
     if(c.boissonMenu)editState.boissonMenu=c.boissonMenu[0];
+    if(c.pain)editState.pain=c.pain[0];
+    if(c.condiments)editState.condiments=[...c.condiments.list];
     if(c.plat)editState.plat=c.plat[0];
     if(c.crudites)editState.crudites='Salade+Tomates+Oignons';
     if(c.menu){editState.menu=false;editState.boissonMenu=DRINKS[0];}
@@ -587,6 +573,15 @@ function openModal(itemId, existingCartItem) {
     $('custom-body').querySelectorAll('.sauce-pill[data-key="plat"]').forEach(p=>{
       p.classList.toggle('active',editState.plat===p.dataset.val);
     });
+    // Pain
+    $('custom-body').querySelectorAll('.sauce-pill[data-key="pain"]').forEach(p=>{
+      p.classList.toggle('active',editState.pain===p.dataset.val);
+    });
+    // Condiments (multi + Sans condiment)
+    $('custom-body').querySelectorAll('.sauce-pill[data-key="condiments"]').forEach(p=>{
+      if(p.dataset.val==='Sans condiment')p.classList.toggle('active',(editState.condiments||[]).length===0);
+      else p.classList.toggle('active',(editState.condiments||[]).includes(p.dataset.val));
+    });
   },50);
 }
 
@@ -606,6 +601,10 @@ function buildModalHTML(c) {
   if(c.accompagnement){const alist=Array.isArray(c.accompagnement)?c.accompagnement:[c.accompagnement];h+='<div class="custom-group"><label class="custom-label">🍟 Accompagnement</label><div class="sauce-grid">'+alist.map(v=>'<button class="sauce-pill" data-key="accompagnement" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
   // Crudités
   if(c.crudites){h+='<div class="custom-group"><label class="custom-label">🥬 Crudités</label><div class="sauce-grid">'+CRUDITES.map(v=>'<button class="sauce-pill" data-key="crudites" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
+  // Pain (naan/sandwichs) — single-select
+  if(c.pain){h+='<div class="custom-group"><label class="custom-label">🫓 Pain</label><div class="sauce-grid">'+c.pain.map(v=>'<button class="sauce-pill" data-key="pain" data-val="'+v+'">'+v+'</button>').join('')+'</div></div>';}
+  // Condiments (multi, max) + "Sans condiment"
+  if(c.condiments){const mx=c.condiments.max||5;h+='<div class="custom-group"><label class="custom-label">🥗 Condiments <span class="custom-hint">('+mx+' max)</span></label><div class="sauce-grid">'+c.condiments.list.map(v=>'<button class="sauce-pill multi" data-key="condiments" data-val="'+v+'">'+v+'</button>').join('')+'<button class="sauce-pill multi" data-key="condiments" data-val="Sans condiment">🚫 Sans condiment</button></div></div>';}
   // Menu toggle (burgers, sandwichs)
   if(c.menu){h+='<div class="custom-group"><label class="custom-label">🍟 En Menu ? <span class="custom-badge">+'+fmt(c.menu)+' = frites + boisson</span></label><div class="toggle-row"><button class="toggle-btn" data-key="menu" data-val="non">Non</button><button class="toggle-btn" data-key="menu" data-val="oui">Oui</button></div><div class="custom-group" id="drink-group" hidden><label class="custom-label">🥤 Boisson</label><div class="sauce-grid">'+DRINKS.map(d=>'<button class="sauce-pill" data-key="boissonMenu" data-val="'+d+'">'+d+'</button>').join('')+'</div></div></div>';}
   // Plat (enfant) — avant les sauces
@@ -624,7 +623,7 @@ function buildModalHTML(c) {
   // Boisson menu standalone (only for items without menu toggle, like tacos menus)
   if(c.boissonMenu&&!c.menu){h+='<div class="custom-group"><label class="custom-label">🥤 Boisson</label><div class="sauce-grid">'+c.boissonMenu.map(d=>'<button class="sauce-pill" data-key="boissonMenu" data-val="'+d+'">'+d+'</button>').join('')+'</div></div>';}
   // No options
-  const hasOpts=c.viandes||c.sauces||c.gratinage||c.accompagnement||c.crudites||c.plat||c.boissonMenu||c.menu||c.extrasConfig;
+  const hasOpts=c.viandes||c.sauces||c.gratinage||c.accompagnement||c.crudites||c.plat||c.boissonMenu||c.menu||c.extrasConfig||c.pain||c.condiments;
   if(!hasOpts){h+='<div class="custom-group" style="text-align:center;border-bottom:0"><p style="color:var(--text-dim);font-size:0.9rem;">'+(editing.desc||'')+'</p></div>';}
   $('custom-body').innerHTML=h;
 
@@ -681,6 +680,22 @@ function buildModalHTML(c) {
       updatePrice();
     });
   });
+
+  // Condiments (multi, max N, avec "Sans condiment")
+  $('custom-body').querySelectorAll('.sauce-pill[data-key="condiments"]').forEach(p=>{
+    p.addEventListener('click',(ev)=>{ev.stopPropagation();
+      const v=p.dataset.val;const mx=(editing.custom&&editing.custom.condiments&&editing.custom.condiments.max)||5;
+      if(!editState.condiments)editState.condiments=[];
+      if(v==='Sans condiment'){editState.condiments=[];}
+      else{const i=editState.condiments.indexOf(v);
+        if(i>=0)editState.condiments.splice(i,1);
+        else{if(editState.condiments.length>=mx)editState.condiments.shift();editState.condiments.push(v);}}
+      $('custom-body').querySelectorAll('.sauce-pill[data-key="condiments"]').forEach(x=>{
+        if(x.dataset.val==='Sans condiment')x.classList.toggle('active',editState.condiments.length===0);
+        else x.classList.toggle('active',editState.condiments.includes(x.dataset.val));
+      });
+    });
+  });
 }
 
 function updateViandePills(){
@@ -724,6 +739,8 @@ function confirmProduct(){
   if(editState.viandes?.length)l+=(l?' • ':'')+editState.viandes.join('+');
   if(c.accompagnement&&editState.accompagnement)l+=(l?' • ':'')+editState.accompagnement;
   if(c.crudites&&editState.crudites)l+=(l?' • ':'')+'Crudités: '+editState.crudites;
+  if(c.pain&&editState.pain)l+=(l?' • ':'')+'Pain: '+editState.pain;
+  if(c.condiments)l+=(l?' • ':'')+'Condiments: '+((editState.condiments&&editState.condiments.length)?editState.condiments.join('+'):'Sans');
   if(editState.sauces?.length)l+=(l?' • ':'')+'Sauces: '+editState.sauces.join('+');
   if(c.boissonMenu&&editState.boissonMenu)l+=(l?' • ':'')+'Boisson: '+editState.boissonMenu;
   if(c.plat&&editState.plat)l+=(l?' • ':'')+editState.plat;
@@ -745,6 +762,8 @@ function confirmProduct(){
   if((editState.viandes&&editState.viandes.length)||exViandes.length)comp.push({i:'🍖',k:'Viandes',base:editState.viandes||[],extra:exViandes});
   if(c.accompagnement&&editState.accompagnement)comp.push({i:'🍟',k:'Accomp.',base:[editState.accompagnement],extra:[]});
   if(c.crudites&&editState.crudites)comp.push({i:'🥬',k:'Crudités',base:[editState.crudites],extra:[]});
+  if(c.pain&&editState.pain)comp.push({i:'🫓',k:'Pain',base:[editState.pain],extra:[]});
+  if(c.condiments)comp.push({i:'🥗',k:'Condiments',base:((editState.condiments&&editState.condiments.length)?editState.condiments:['Sans condiment']),extra:[]});
   if((editState.sauces&&editState.sauces.length)||exSauces.length)comp.push({i:'🥫',k:'Sauces',base:editState.sauces||[],extra:exSauces});
   if(c.boissonMenu&&editState.boissonMenu)comp.push({i:'🥤',k:'Boisson',base:[editState.boissonMenu],extra:[]});
   if(c.plat&&editState.plat)comp.push({i:'🍽️',k:'Plat',base:[editState.plat],extra:[]});
