@@ -881,7 +881,7 @@ function confirmProduct(){
 
   if(wasEditing){cart[editingCartIdx].custom={...editState};cart[editingCartIdx].price=p;cart[editingCartIdx].label=l;cart[editingCartIdx].baseLabel=baseLabel;cart[editingCartIdx].extrasLabel=extrasLabel;cart[editingCartIdx].comp=comp;cart[editingCartIdx].name=itemName;editingCartIdx=-1;}
   else{const ex=cart.find(ci=>ci.id===editing.id&&ci.label===l&&ci.price===p);if(ex){ex.qty+=editQty;ex.name=itemName;}else cart.push({id:editing.id,qty:editQty,custom:{...editState},price:p,label:l,baseLabel:baseLabel,extrasLabel:extrasLabel,comp:comp,emoji:editing.emoji,name:itemName});}
-  saveCart();updateCartUI();renderMenu(activeCat);pulseBadge();closeModal();
+  saveCart();updateCartUI();pulseBadge();closeModal();
   showToast(wasEditing ? (itemName+' modifié ✏️') : (itemName+' ajouté ! 🎉'));
   if(wasEditing)openCart();
 }
