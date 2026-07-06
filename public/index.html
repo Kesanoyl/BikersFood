@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Bikers Food — Burgers · Smash · Naan · Noisy-le-Sec</title>
+  <meta name="description" content="Bikers Food Noisy-le-Sec — Burgers, smash, naan, tacos & sandwichs faits maison, 100% halal. Commandez en click & collect. 7 Bd de la Boissière, 93130 Noisy-le-Sec." />
+  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#060606" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Bikers Food" />
+  <link rel="icon" type="image/png" href="img/app-icon-192.png" />
+  <link rel="apple-touch-icon" href="img/app-icon-180.png" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader" class="loader">
+    <img src="img/logo.png" alt="Bikers Food" class="loader-logo" />
+  </div>
+  <noscript><style>#loader{display:none!important}</style></noscript>
+  <script>setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('hidden');},5000);</script>
+
+  <!-- PARTICLES -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a class="brand" href="#hero">
+      <img src="img/logo.png" alt="Bikers Food" />
+      BIKERS<span class="brand-accent"> FOOD</span>
+    </a>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-menu">
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#howit" class="nav-link">Commander</a>
+      <a href="#contact" class="nav-link">Contact</a>
+      <a href="#" class="nav-link" id="nav-track">Suivre</a>
+      <a href="#menu" class="nav-cta">Commander</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="img/banner.png" alt="Bikers Food" />
+    </div>
+    <div class="hero-content">
+      <img src="img/logo.png" alt="Bikers Food" class="hero-logo" />
+      <h1 class="reveal">Burgers, Smash<br><span class="accent">& Naan gourmands</span> 🔥</h1>
+      <p class="hero-slogan reveal reveal-delay-1">Casual Food · Noisy-le-Sec</p>
+      <p class="hero-claim reveal reveal-delay-1">Smash burgers, tacos & sandwichs généreux 🍔</p>
+      <div class="hero-badges reveal reveal-delay-2">
+        <span class="hero-badge">🍔 Fait minute</span>
+        <span class="hero-badge">🔥 Smash</span>
+        <span class="hero-badge hero-badge-halal">100% Halal</span>
+      </div>
+      <p class="hero-sub reveal reveal-delay-2">
+        Burgers, smash, naan, tacos & sandwichs faits maison. Ingrédients frais, viandes halal.
+        Commandez en click & collect — on s'occupe du reste.
+      </p>
+      <div class="hero-actions reveal reveal-delay-2">
+        <a href="#menu" class="btn btn-primary btn-lg">Voir le menu</a>
+        <a href="#contact" class="btn btn-outline btn-lg">Nous trouver 📍</a>
+      </div>
+    </div>
+    <a href="#menu" class="scroll-cue" aria-label="Défiler"><span></span></a>
+  </header>
+
+  <!-- FOOD GALLERY -->
+  <section class="food-gallery" id="gallery">
+    <div class="section-head reveal">
+      <p class="eyebrow">Nos spécialités</p>
+      <h2 class="display">Fait maison,<br>chaque jour</h2>
+    </div>
+    <div class="food-grid">
+      <div class="food-card reveal"><img src="img/food/food1.jpg" alt="Tacos" loading="lazy" /></div>
+      <div class="food-card reveal reveal-delay-1"><img src="img/food/food2.jpg" alt="Tacos gratinés" loading="lazy" /></div>
+      <div class="food-card reveal reveal-delay-2"><img src="img/food/food3.jpg" alt="Bowl" loading="lazy" /></div>
+      <div class="food-card reveal reveal-delay-3"><img src="img/food/food4.jpg" alt="Roulé" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="menu">
+    <div class="section-head reveal">
+      <p class="eyebrow">Notre carte</p>
+      <h2 class="display">Le Menu</h2>
+      <p class="section-sub">Burgers, smash, naan, tacos & sandwichs faits maison, avec des produits frais et 100% halal.</p>
+    </div>
+
+    <div class="menu-filters-wrapper" id="menu-filters-wrapper">
+      <div class="menu-filters" id="menu-filters">
+        <button class="filter-pill active" data-cat="all">Tout</button>
+        <button class="filter-pill" data-cat="formules">🍔 Formules</button>
+        <button class="filter-pill" data-cat="menus-duo-burgers">🍔 Duo Burgers</button>
+        <button class="filter-pill" data-cat="menu-smash-burgers">🔥 Menus Smash</button>
+        <button class="filter-pill" data-cat="menus-burgers">🍔 Menus Burgers</button>
+        <button class="filter-pill" data-cat="menu-naan-burgers">🫓 Menus Naan</button>
+        <button class="filter-pill" data-cat="menu-naandwich">🌯 Naan'Dwich</button>
+        <button class="filter-pill" data-cat="menus-sandwichs">🥖 Sandwichs</button>
+        <button class="filter-pill" data-cat="smash-burgers-seuls">🔥 Smash</button>
+        <button class="filter-pill" data-cat="burgers-seuls">🍔 Burgers</button>
+        <button class="filter-pill" data-cat="naan-burgers-seuls">🫓 Naan Burgers</button>
+        <button class="filter-pill" data-cat="tacos-seuls">🌮 Tacos</button>
+        <button class="filter-pill" data-cat="menus-kids">🧸 Enfant</button>
+        <button class="filter-pill" data-cat="tex-mex">🍗 Tex Mex</button>
+        <button class="filter-pill" data-cat="desserts">🍩 Desserts</button>
+        <button class="filter-pill" data-cat="boissons">🥤 Boissons</button>
+      </div>
+    </div>
+
+    <div class="menu-grid" id="menu-grid">
+      <!-- Rempli par app.js -->
+    </div>
+  </section>
+
+  <!-- STICKY CONTAINER (wraps filters, menu grid, and rest of page so filters stick to bottom) -->
+<div class="menu-sticky-container">
+
+  <!-- HOW IT WORKS -->
+  <section class="howit" id="howit">
+    <div class="section-head reveal">
+      <p class="eyebrow">Commander en ligne</p>
+      <h2 class="display">Comment ça marche</h2>
+    </div>
+    <div class="howit-steps">
+      <div class="howit-step reveal">
+        <div class="howit-num">1</div>
+        <div class="howit-icon">📋</div>
+        <h3>Composez</h3>
+        <p>Parcourez le menu et choisissez vos burgers, smash & naan préférés.</p>
+      </div>
+      <div class="howit-step reveal reveal-delay-1">
+        <div class="howit-num">2</div>
+        <div class="howit-icon">💳</div>
+        <h3>Payez</h3>
+        <p>Paiement 100% sécurisé en ligne. À emporter ou sur place.</p>
+      </div>
+      <div class="howit-step reveal reveal-delay-2">
+        <div class="howit-num">3</div>
+        <div class="howit-icon">🔍</div>
+        <h3>Suivez</h3>
+        <p>Statut en temps réel. Notification quand votre commande est prête.</p>
+      </div>
+      <div class="howit-step reveal reveal-delay-3">
+        <div class="howit-num">4</div>
+        <div class="howit-icon">🏃</div>
+        <h3>Dégustez</h3>
+        <p>Récupérez votre commande sur place. Bon appétit !</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" id="stats">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-num" data-count="85" data-suffix="+">0</div>
+        <div class="stat-lbl">Produits au menu</div>
+      </div>
+      <div class="stat reveal reveal-delay-1">
+        <div class="stat-num" data-count="15" data-suffix="">0</div>
+        <div class="stat-lbl">Catégories</div>
+      </div>
+      <div class="stat reveal reveal-delay-2">
+        <div class="stat-num" data-count="100" data-suffix="%">0</div>
+        <div class="stat-lbl">Halal</div>
+      </div>
+      <div class="stat reveal reveal-delay-3">
+        <div class="stat-num" data-count="7" data-suffix="/7">0</div>
+        <div class="stat-lbl">Jours par semaine</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="testi" id="testi">
+    <div class="section-head reveal">
+      <p class="eyebrow">Ils en parlent</p>
+      <h2 class="display">Avis clients</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Les meilleurs smash burgers du coin ! Le Bikers Smash est une tuerie, cheddar fondant et pain moelleux. Je commande chaque semaine."</p>
+        <p class="testi-author">— Karim L.</p>
+      </div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Découvert par hasard, devenu accro. Les naan burgers sont généreux et l'équipe est super sympa. Portions énormes pour le prix !"</p>
+        <p class="testi-author">— Sarah M.</p>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Produits frais, service rapide et commande en ligne au top. Le click & collect fonctionne parfaitement, je recommande à 100% !"</p>
+        <p class="testi-author">— Thomas D.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-head reveal">
+      <p class="eyebrow">Nous trouver</p>
+      <h2 class="display">Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>📍 Bikers Food</h3>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Adresse</strong>
+            <span>7 Bd de la Boissière, 93130 Noisy-le-Sec</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-text">
+            <strong>Horaires</strong>
+            <span>Lun–Jeu 11h30 – 00h00 · Ven 11h30 – 13h00 &amp; 14h30 – 00h00 · Sam–Dim 11h30 – 00h00</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <strong>Téléphone</strong>
+            <span><a href="tel:+33141636145" style="color:inherit;text-decoration:none;">01 41 63 61 45</a></span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🛵</div>
+          <div class="contact-item-text">
+            <strong>Livraison</strong>
+            <span>Uber Eats · Deliveroo · Borneo</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-map reveal reveal-delay-1">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=2.4420%2C48.8790%2C2.4620%2C48.8890&amp;layer=mapnik&amp;marker=48.8840%2C2.4520" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte Bikers Food Noisy-le-Sec"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- CART PANEL -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-panel" id="cart-panel">
+    <div class="cart-handle"></div>
+    <div class="cart-header">
+      <h3>🛒 Ma commande</h3>
+      <button class="cart-close" id="cart-close" aria-label="Fermer">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <p class="cart-empty">Votre panier est vide. Parcourez le menu et ajoutez vos articles préférés !</p>
+    </div>
+    <div class="cart-footer" id="cart-footer" hidden>
+      <div class="cart-clear">
+        <button class="cart-clear-btn" id="cart-clear-btn">Vider le panier 🗑️</button>
+      </div>
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cart-total-price">0,00€</strong>
+      </div>
+      <button class="btn btn-primary btn-lg btn-full" id="cart-order-btn">
+        💳 Payer en ligne
+      </button>
+      <p class="cart-note">Paiement sécurisé par carte bancaire.</p>
+    </div>
+  </div>
+  <div class="cart-badge" id="cart-badge" hidden>
+    🛒
+    <span class="cart-count" id="cart-count">0</span>
+  </div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="custom-overlay" id="custom-overlay"></div>
+  <div class="custom-modal" id="custom-modal">
+    <div class="custom-header">
+      <button class="custom-back" id="custom-back" aria-label="Retour">←</button>
+      <div>
+        <h3 id="custom-title">Personnaliser</h3>
+        <p id="custom-item-desc" style="font-size:0.82rem;color:var(--text-dim);margin-top:4px;display:none;"></p>
+      </div>
+    </div>
+    <div class="custom-body" id="custom-body">
+      <!-- Rempli par app.js -->
+    </div>
+    <div class="custom-footer">
+      <div class="custom-qty">
+        <button id="custom-qty-minus">−</button>
+        <span id="custom-qty-val">1</span>
+        <button id="custom-qty-plus">+</button>
+      </div>
+      <div class="custom-price" id="custom-price">0,00€</div>
+      <button class="custom-add-btn" id="custom-add-btn">Ajouter au panier</button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="checkout-overlay" id="checkout-overlay"></div>
+  <div class="checkout-modal" id="checkout-modal">
+    <div class="checkout-header">
+      <button class="checkout-back" id="checkout-back" aria-label="Retour">←</button>
+      <h3>💳 Paiement</h3>
+    </div>
+    <div class="checkout-body">
+      <div class="checkout-group">
+        <label class="checkout-label">Mode de commande</label>
+        <div class="toggle-row" id="order-mode-row">
+          <button class="toggle-btn active" data-key="mode" data-val="emporter">🏃 À emporter</button>
+          <button class="toggle-btn" data-key="mode" data-val="surplace">🍽️ Sur place</button>
+        </div>
+      </div>
+
+      
+
+      <div class="checkout-group">
+        <label class="checkout-label">📞 Téléphone <span class="checkout-required">*</span></label>
+        <input type="tel" id="checkout-phone" class="checkout-input" placeholder="06 12 34 56 78" autocomplete="tel" />
+        <p class="input-hint">Notification quand votre commande est prête.</p>
+      </div>
+
+      <div class="checkout-group">
+        <label class="checkout-label">👤 Prénom</label>
+        <input type="text" id="checkout-name" class="checkout-input" placeholder="Votre prénom" autocomplete="given-name" />
+      </div>
+
+      <label class="checkout-remember">
+        <input type="checkbox" id="checkout-remember" checked />
+        <span>Se souvenir de moi — historique de commandes et notifications 🔔</span>
+      </label>
+    </div>
+
+    <!-- TOTAL + PAYER -->
+    <div class="checkout-footer-recap">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="checkout-total">0,00€</strong>
+      </div>
+      <p class="checkout-recap-eta">⏱️ Temps estimé : <strong id="checkout-eta">~15 min</strong></p>
+      <button class="btn btn-primary btn-lg btn-full" id="checkout-pay-btn">
+        💳 Payer <span id="checkout-btn-total">0,00€</span>
+      </button>
+      <p class="cart-note">Paiement sécurisé Stripe · Données chiffrées</p>
+    </div>
+  </div>
+
+  <!-- TRACKING MODAL -->
+  <div class="checkout-overlay" id="track-overlay"></div>
+  <div class="checkout-modal" id="track-modal">
+    <div class="checkout-header">
+      <button class="checkout-back" id="track-back" aria-label="Retour">←</button>
+      <h3>🔍 Suivre ma commande</h3>
+    </div>
+    <div class="checkout-body">
+      <div class="checkout-group">
+        <label class="checkout-label">📞 Votre téléphone</label>
+        <input type="tel" id="track-phone" class="checkout-input" placeholder="06 12 34 56 78" autocomplete="tel" />
+        <p class="input-hint">Affiche toutes vos commandes récentes avec ce téléphone.</p>
+      </div>
+      <div id="track-result"></div>
+    </div>
+    <div class="checkout-footer">
+      <button class="btn btn-primary btn-lg btn-full" id="track-btn">🔍 Rechercher</button>
+    </div>
+  </div>
+
+</div>
+
+  <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Retour en haut" aria-label="Retour en haut">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">BIKERS<span style="color:var(--rojo)"> FOOD</span></div>
+    <p style="color:var(--text-dim);font-size:0.9rem;">Casual Food · Noisy-le-Sec</p>
+	      <div class="footer-social">
+	      <a href="https://www.instagram.com/bikersfoodofficiel/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+	    </div>
+    <p class="footer-legal">© 2026 Bikers Food — Tous droits réservés · 7 Bd de la Boissière, 93130 Noisy-le-Sec</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
